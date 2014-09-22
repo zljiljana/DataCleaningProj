@@ -1,3 +1,5 @@
+library(plyr)
+
 # Step 1: Merges the training and the test sets to create one data set.
 X_train <- read.table("./UCI HAR Dataset//train/X_train.txt")
 y_train <- read.table("./UCI HAR Dataset//train/y_train.txt")
@@ -36,3 +38,4 @@ colnames(tidyData) <- featuresToRelabel
 # Step 5: From the data set in step 4, creates a second, independent tidy data set with the average of
 #           each variable for each activity and each subject.
 newTidyData <- ddply(tidyData, .(Subject, Activity), numcolwise(mean))
+write.table(newTidyData, file = "finalData.txt", row.names = FALSE)
